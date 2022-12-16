@@ -22,9 +22,31 @@ class Content(models.Model):
     type = models.CharField(max_length=10)
     created_at = models.DateTimeField(default=datetime.now)
     updated_at = models.DateTimeField(default=datetime.now)
+    def __str__(self) -> str:
+        return self.title
 class Image(models.Model):
     id = models.UUIDField(primary_key=True,default=uuid.uuid4)
     content_id = models.UUIDField(default=uuid.uuid4)
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='content_images',blank=True)
+    def __str__(self) -> str:
+        return self.title
+class Comment(models.Model):
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4)
+    content_id = models.UUIDField(default=uuid.uuid4)
+    user_id = models.IntegerField()
+    ip = models.CharField(max_length=50,blank=True,null=True)
+    created_at = models.DateTimeField(default=datetime.now)
+    updated_at = models.DateTimeField(default=datetime.now)
+    comment = models.TextField()
+
+    def __str__(self) -> str:
+        return self.comment
+class Faq(models.Model):
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4)
+    question = models.TextField()
+    answer = models.TextField()
+    status = models.BooleanField()
+    created_at = models.DateTimeField(default=datetime.now)
+    updated_at = models.DateTimeField(default=datetime.now)
 

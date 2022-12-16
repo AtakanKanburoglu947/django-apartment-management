@@ -7,3 +7,10 @@
     <input type="text" placeholder="title" name="title"> <br>
     <button type="submit">submit</button>
 </form>
+{% for content in contents %}
+<div>{{content.description}} <a href="/comment?post_id={{content.id}}">comment</a>
+
+</div>
+
+{% endfor %}
+{{comments}}
