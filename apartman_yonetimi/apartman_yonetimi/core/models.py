@@ -54,15 +54,15 @@ class Faq(models.Model):
 
 class Payment(models.Model):
     id = models.UUIDField(primary_key=True,default=uuid.uuid4)
-    user_id = models.UUIDField(default=uuid.uuid4)
-    year = models.DateField(datetime.now)
-    month = models.DateField(datetime.now)
+    user_id = models.IntegerField()
+    year = models.DateTimeField(default=datetime.now())
+    month = models.DateTimeField(default=datetime.now())
     payment = models.IntegerField()
     status = models.BooleanField()
     created_at = models.DateTimeField(default=datetime.now)
     updated_at = models.DateTimeField(default=datetime.now) 
     def __str__(self) -> str:
-        return self.payment
+        return str(self.payment)
 class Message(models.Model):
     id = models.UUIDField(primary_key=True,default=uuid.uuid4)
     name = models.CharField(max_length=50,null=True)
@@ -86,4 +86,15 @@ class Menu(models.Model):
     updated_at = models.DateTimeField(default=datetime.now)
     def __str__(self) -> str:
         return self.title
-
+class Request(models.Model):
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4)
+    user_id = models.IntegerField()
+    type = models.CharField(max_length=10)
+    subject = models.CharField(max_length=50,null=True)
+    message = models.TextField()
+    adminnote = models.TextField()
+    status = models.BooleanField()
+    created_at = models.DateTimeField(default=datetime.now)
+    updated_at = models.DateTimeField(default=datetime.now)
+    def __str__(self) -> str:
+        return self.message

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
-from core.models import Profile,Content,Image,Comment,Message,Faq,Menu
+from core.models import Profile,Content,Image,Comment,Message,Faq,Payment,Menu,Request
 from django.http import HttpResponse
 # Create your views here.
 
@@ -24,6 +24,30 @@ def contact(request):
         return redirect('/contact')
 
     return render(request,'contact-us.html')
+@login_required(login_url='signin/')
+def request(request):
+    user_profile = Profile.objects.get(user= request.user)
+    user_id = user_profile.id_user
+    if request.method == 'POST':
+        subject = request.POST['subject']
+        type = request.POST['type']
+        message = request.POST['message']
+        Request.objects.create(user_id=user_id,subject=subject,type=type,message=message,status=True)
+
+    return render(request,'request.html')
+def faq(request):
+    faqs = Faq.objects.all()
+    return render(request,'faq.html',{'faqs':faqs})
+@login_required(login_url='signin/')
+def payment(request):
+    user_profile = Profile.objects.get(user= request.user)
+    user_id = user_profile.id_user
+    if request.method == 'POST':
+        payment = request.POST['payment']
+        Payment.objects.create(payment=payment,status=True,user_id=user_id)
+        
+    return render(request,'payment.html')
+@login_required(login_url='signin/')
 def blog(request):
     contents = Content.objects.all()
     return render(request,'blog.html',{'contents':contents})
