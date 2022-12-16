@@ -16,7 +16,7 @@ class Content(models.Model):
     title = models.CharField(max_length=100)
     keywords = models.CharField(max_length=100)
     description = models.TextField()
-    image = models.ImageField(upload_to='content_images',blank=True)
+    image = models.ImageField(upload_to='content_images',default='content_images/blog_image.png')
     menu_id = models.IntegerField(blank=True,null=True)
     detail = models.CharField(max_length=100)
     type = models.CharField(max_length=10)

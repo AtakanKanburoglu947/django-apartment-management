@@ -69,10 +69,12 @@ def upload(request):
         image = request.FILES.get('image')
         description = request.POST['description']
         title = request.POST['title']
+        keywords = request.POST['keywords']
         new_image = Image.objects.create(image=image,title = title)
         new_image.save()
-        new_content = Content.objects.create(id=new_image.content_id,image=image,description=description)
+        new_content = Content.objects.create(id=new_image.content_id,image=image,description=description,keywords=keywords)
         new_content.save()
+        return redirect('blog')
     contents = Content.objects.all()
     return render(request,'upload.html',{'contents': contents})
 def signin(request):
