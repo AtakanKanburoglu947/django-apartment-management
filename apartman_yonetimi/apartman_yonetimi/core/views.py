@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
-from core.models import Profile,Content
+from core.models import Profile,Content,Image
 from django.http import HttpResponse
 # Create your views here.
 @login_required(login_url='signin/')
@@ -17,7 +17,10 @@ def upload(request):
     if request.method == 'POST':
         image = request.FILES.get('image')
         description = request.POST['description']
-        new_content = Content.objects.create(image=image,description=description)
+        title = request.POST['title']
+        new_image = Image.objects.create(image=image,title = title)
+        new_image.save()
+        new_content = Content.objects.create(id=new_image.content_id,image=image,description=description)
         new_content.save()
     contents = Content.objects.all()
     return render(request,'upload.html',{'contents': contents})

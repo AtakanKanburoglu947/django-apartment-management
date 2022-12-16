@@ -22,4 +22,9 @@ class Content(models.Model):
     type = models.CharField(max_length=10)
     created_at = models.DateTimeField(default=datetime.now)
     updated_at = models.DateTimeField(default=datetime.now)
+class Image(models.Model):
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4)
+    content_id = models.UUIDField(default=uuid.uuid4)
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='content_images',blank=True)
 
