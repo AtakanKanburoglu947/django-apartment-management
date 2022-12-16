@@ -3,18 +3,31 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
-from core.models import Profile,Content,Image,Comment,Faq
+from core.models import Profile,Content,Image,Comment,Message,Faq,Menu
 from django.http import HttpResponse
 # Create your views here.
-@login_required(login_url='signin/')
 
+@login_required(login_url='signin/')
 def index(request):
     return render(request,'index.html')
+
+@login_required(login_url='signin/')
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        subject = request.POST['subject']
+        message = request.POST['message']
+        Message.objects.create(name=name,email=email,phone=phone,
+        subject=subject,message=message)
+        return redirect('/contact')
+
     return render(request,'contact-us.html')
 def blog(request):
     contents = Content.objects.all()
     return render(request,'blog.html',{'contents':contents})
+@login_required(login_url='signin/')  
 def post(request,id):   
     content = Content.objects.get(id=id)
     comments = Comment.objects.filter(content_id = id)
@@ -75,15 +88,7 @@ def settings(request):
     return render(request,'settings.html',{'user_profile':user_profile})
 
 
-@login_required(login_url='signin/')
-def comment(request):
-    user_profile = Profile.objects.get(user= request.user)
-    content_id = request.GET.get('post_id')
-    if request.method == 'POST':
-        message = request.POST('comment')
-        new_comment = Comment.objects.create(content_id=content_id,user_id = user_profile.id_user,comment=message)
-        new_comment.save()
-        return redirect('/')
+
 
 
 

@@ -49,4 +49,41 @@ class Faq(models.Model):
     status = models.BooleanField()
     created_at = models.DateTimeField(default=datetime.now)
     updated_at = models.DateTimeField(default=datetime.now)
+    def __str__(self) -> str:
+        return self.question
+
+class Payment(models.Model):
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4)
+    user_id = models.UUIDField(default=uuid.uuid4)
+    year = models.DateField(datetime.now)
+    month = models.DateField(datetime.now)
+    payment = models.IntegerField()
+    status = models.BooleanField()
+    created_at = models.DateTimeField(default=datetime.now)
+    updated_at = models.DateTimeField(default=datetime.now) 
+    def __str__(self) -> str:
+        return self.payment
+class Message(models.Model):
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4)
+    name = models.CharField(max_length=50,null=True)
+    email = models.CharField(max_length=50,null=True)
+    phone = models.CharField(max_length=50,null=True)
+    subject = models.CharField(max_length=50,null=True)
+    message = models.TextField()
+    ip = models.IntegerField(null=True)
+    created_at = models.DateTimeField(default=datetime.now)
+    updated_at = models.DateTimeField(default=datetime.now)
+    def __str__(self) -> str:
+        return self.name
+class Menu(models.Model):
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4)
+    parent_id = models.UUIDField(default=uuid.uuid4)
+    title = "Title"
+    keywords = models.CharField(max_length=100,null=True)
+    description = models.TextField(null=True)
+    image = models.ImageField(upload_to='content_images',blank=True)
+    created_at = models.DateTimeField(default=datetime.now)
+    updated_at = models.DateTimeField(default=datetime.now)
+    def __str__(self) -> str:
+        return self.title
 
