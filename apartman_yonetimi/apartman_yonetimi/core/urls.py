@@ -9,5 +9,7 @@ urlpatterns = [
     path('signin/',views.signin),
     path('settings/',views.settings,name='settings'),
     path('upload/',views.upload,name='upload'),
-    path('comment',views.comment,name='comment')
+    path('comment',views.comment,name='comment'),
+    path('blogs/<uuid:id>/',views.post,name='post'),
+    path('blog/',views.blog,name='blog')
 ]

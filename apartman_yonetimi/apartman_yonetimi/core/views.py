@@ -12,7 +12,20 @@ def index(request):
     return render(request,'index.html')
 def contact(request):
     return render(request,'contact-us.html')
-
+def blog(request):
+    contents = Content.objects.all()
+    return render(request,'blog.html',{'contents':contents})
+def post(request,id):   
+    content = Content.objects.get(id=id)
+    comments = Comment.objects.filter(content_id = id)
+    user_profile = Profile.objects.get(user= request.user)
+    content_id = content.id
+    if request.method == 'POST':
+        message = request.POST['comment']
+        new_comment = Comment.objects.create(content_id=content_id,user_id = user_profile.id_user,comment=message)
+        new_comment.save()
+        return redirect('/blogs/'+str(content_id))
+    return render(request,'blog-item.html',{'content': content, 'comments':comments})
 @login_required(login_url='signin/')  
 def upload(request):
     if request.method == 'POST':
@@ -60,15 +73,17 @@ def settings(request):
             user_profile.save()
         return redirect('settings')
     return render(request,'settings.html',{'user_profile':user_profile})
+
+
 @login_required(login_url='signin/')
-
-
 def comment(request):
     user_profile = Profile.objects.get(user= request.user)
     content_id = request.GET.get('post_id')
-    new_comment = Comment.objects.create(content_id=content_id,user_id = user_profile.id_user,comment="test")
-    new_comment.save()
-    return redirect('/')
+    if request.method == 'POST':
+        message = request.POST('comment')
+        new_comment = Comment.objects.create(content_id=content_id,user_id = user_profile.id_user,comment=message)
+        new_comment.save()
+        return redirect('/')
 
 
 
