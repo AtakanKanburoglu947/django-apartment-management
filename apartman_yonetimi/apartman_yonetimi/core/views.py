@@ -25,8 +25,28 @@ def signin(request):
             return redirect('signin/')
     else:
         return render(request,'signin.html')
+@login_required(login_url='signin/')
 def settings(request):
-    return render(request,'settings.html')
+    user_profile = Profile.objects.get(user= request.user)
+    if request.method == 'POST':
+        if request.FILES.get('image') == None:
+            image = user_profile.image
+            phone = request.POST['phone']
+            address = request.POST['address']
+            user_profile.image = image
+            user_profile.phone = phone
+            user_profile.address = address
+            user_profile.save()
+        if request.FILES.get('image') != None:
+            image = request.FILES.get('image')
+            phone = request.POST['phone']
+            address = request.POST['address']
+            user_profile.image = image
+            user_profile.phone = phone
+            user_profile.address = address
+            user_profile.save()
+        return redirect('settings')
+    return render(request,'settings.html',{'user_profile':user_profile})
 def signup(request):  
     if request.method == 'POST':
         username = request.POST['username']
@@ -43,6 +63,8 @@ def signup(request):
             else:
                user = User.objects.create_user(username=username,email=email,password=password)
                user.save()
+               user_login = auth.authenticate(username=username,password=password)
+               auth.login(request,user_login)
                user_model = User.objects.get(username=username)
                new_profile = Profile.objects.create(user=user_model,id_user=user_model.id)
                new_profile.save()
