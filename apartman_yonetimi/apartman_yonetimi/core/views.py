@@ -3,15 +3,16 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
-from core.models import Profile
+from core.models import Profile,Content
 from django.http import HttpResponse
 # Create your views here.
+
 @login_required(login_url='signin/')
 
 def index(request):
     return render(request,'index.html')
-def contact(request):
-    return render(request,'contact-us.html')
+
+
 def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -47,6 +48,15 @@ def settings(request):
             user_profile.save()
         return redirect('settings')
     return render(request,'settings.html',{'user_profile':user_profile})
+@login_required(login_url='signin/')  
+def upload(request):
+    if request.method == 'POST':
+        image = request.FILES.get('image')
+        description = request.POST['description']
+        new_content = Content.objects.create(image=image,description=description)
+        new_content.save()
+    contents = Content.objects.all()
+    return render(request,'upload.html',{'contents': contents})
 def signup(request):  
     if request.method == 'POST':
         username = request.POST['username']
