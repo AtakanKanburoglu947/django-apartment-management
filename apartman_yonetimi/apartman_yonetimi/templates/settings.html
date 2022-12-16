@@ -1,8 +1,10 @@
+{% load static %}
+
 <h1>settings</h1>
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{user_profile}}
-    <img src="{{user_profile.image}}" alt="">
+    <img src="{{user_profile.image.url}}" alt="">
     <input type="file" placeholder="image" name="image"> <br>
     <input type="text" placeholder="phone" name="phone"> <br>
     <input type="text" placeholder="address" name="address"> <br>
