@@ -6,13 +6,20 @@ from django.contrib import messages
 from core.models import Profile,Content,Image,Comment,Message,Faq,Payment,Menu,Request,Setting
 from django.http import HttpResponse
 # Create your views here.
+
 setting = Setting.objects.all().first
+
 @login_required(login_url='signin')
 def index(request):
-    return render(request,'index.html')
+    return render(request,'index.html',{'setting' :setting})
+
+def menu(request):
+    return render(request,'menu.html',{'setting' :setting})
+
 
 @login_required(login_url='signin')
 def contact(request):
+
     if request.method == 'POST':
         name = request.POST['name']
         email = request.POST['email']
@@ -23,7 +30,7 @@ def contact(request):
         subject=subject,message=message)
         return redirect('/contact')
 
-    return render(request,'contact-us.html')
+    return render(request,'contact-us.html',{'setting':setting})
 @login_required(login_url='signin')
 def request(request):
     user_profile = Profile.objects.get(user= request.user)
@@ -34,10 +41,10 @@ def request(request):
         message = request.POST['message']
         Request.objects.create(user_id=user_id,subject=subject,type=type,message=message,status=True)
 
-    return render(request,'request.html')
+    return render(request,'request.html',{'setting' :setting})
 def faq(request):
     faqs = Faq.objects.all()
-    return render(request,'faq.html',{'faqs':faqs})
+    return render(request,'faq.html',{'faqs':faqs,'setting' :setting})
 @login_required(login_url='signin')
 def payment(request):
     user_profile = Profile.objects.get(user= request.user)
@@ -46,14 +53,15 @@ def payment(request):
         payment = request.POST['payment']
         Payment.objects.create(payment=payment,status=True,user_id=user_id)
         
-    return render(request,'payment.html')
+    return render(request,'payment.html',{'setting' :setting})
 @login_required(login_url='signin')
 def blog(request):
     contents = Content.objects.all()
-    return render(request,'blog.html',{'contents':contents})
+    return render(request,'blog.html',{'contents':contents,'setting' :setting})
 @login_required(login_url='signin')
 def about(request):
-    return render(request,'about-us.html')
+    setting = Setting.objects.all().first
+    return render(request,'about-us.html',{'setting':setting})
 @login_required(login_url='signin')  
 def post(request,id):   
     content = Content.objects.get(id=id)
@@ -65,7 +73,7 @@ def post(request,id):
         new_comment = Comment.objects.create(content_id=content_id,user_id = user_profile.id_user,comment=message)
         new_comment.save()
         return redirect('/blogs/'+str(content_id))
-    return render(request,'blog-item.html',{'content': content, 'comments':comments})
+    return render(request,'blog-item.html',{'content': content, 'comments':comments,'setting' :setting})
 @login_required(login_url='signin')  
 def upload(request):
     if request.method == 'POST':
@@ -79,7 +87,7 @@ def upload(request):
         new_content.save()
         return redirect('blog')
     contents = Content.objects.all()
-    return render(request,'upload.html',{'contents': contents})
+    return render(request,'upload.html',{'contents': contents,'setting' :setting})
 def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -119,7 +127,7 @@ def settings(request):
 @login_required(login_url='signin')
 def account(request=request):
     user_profile = Profile.objects.get(user= request.user)
-    return render(request,'account.html',{'user_profile':user_profile})
+    return render(request,'account.html',{'user_profile':user_profile,'setting' :setting})
 
 @login_required(login_url='signin')
 def logout(request):
