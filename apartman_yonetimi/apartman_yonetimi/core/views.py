@@ -7,11 +7,11 @@ from core.models import Profile,Content,Image,Comment,Message,Faq,Payment,Menu,R
 from django.http import HttpResponse
 # Create your views here.
 
-@login_required(login_url='signin/')
+@login_required(login_url='signin')
 def index(request):
     return render(request,'index.html')
 
-@login_required(login_url='signin/')
+@login_required(login_url='signin')
 def contact(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -24,7 +24,7 @@ def contact(request):
         return redirect('/contact')
 
     return render(request,'contact-us.html')
-@login_required(login_url='signin/')
+@login_required(login_url='signin')
 def request(request):
     user_profile = Profile.objects.get(user= request.user)
     user_id = user_profile.id_user
@@ -38,7 +38,7 @@ def request(request):
 def faq(request):
     faqs = Faq.objects.all()
     return render(request,'faq.html',{'faqs':faqs})
-@login_required(login_url='signin/')
+@login_required(login_url='signin')
 def payment(request):
     user_profile = Profile.objects.get(user= request.user)
     user_id = user_profile.id_user
@@ -47,11 +47,11 @@ def payment(request):
         Payment.objects.create(payment=payment,status=True,user_id=user_id)
         
     return render(request,'payment.html')
-@login_required(login_url='signin/')
+@login_required(login_url='signin')
 def blog(request):
     contents = Content.objects.all()
     return render(request,'blog.html',{'contents':contents})
-@login_required(login_url='signin/')  
+@login_required(login_url='signin')  
 def post(request,id):   
     content = Content.objects.get(id=id)
     comments = Comment.objects.filter(content_id = id)
@@ -63,7 +63,7 @@ def post(request,id):
         new_comment.save()
         return redirect('/blogs/'+str(content_id))
     return render(request,'blog-item.html',{'content': content, 'comments':comments})
-@login_required(login_url='signin/')  
+@login_required(login_url='signin')  
 def upload(request):
     if request.method == 'POST':
         image = request.FILES.get('image')
@@ -87,10 +87,10 @@ def signin(request):
             return redirect('/')
         else:
             messages.info(request,'Credentials Invalid')
-            return redirect('signin/')
+            return redirect('signin')
     else:
         return render(request,'signin.html')
-@login_required(login_url='signin/')
+@login_required(login_url='signin')
 def settings(request):
     user_profile = Profile.objects.get(user= request.user)
     if request.method == 'POST':
@@ -110,14 +110,15 @@ def settings(request):
             user_profile.phone = phone
             user_profile.address = address
             user_profile.save()
-        return redirect('settings')
+        return redirect('/')
     return render(request,'settings.html',{'user_profile':user_profile})
 
 
 
 
-
-
+def logout(request):
+    auth.logout(request)
+    return redirect('signin')
 def signup(request):  
     if request.method == 'POST':
         username = request.POST['username']
