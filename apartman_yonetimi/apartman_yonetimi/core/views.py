@@ -113,9 +113,12 @@ def settings(request):
         return redirect('/')
     return render(request,'settings.html',{'user_profile':user_profile})
 
+@login_required(login_url='signin')
+def account(request=request):
+    user_profile = Profile.objects.get(user= request.user)
+    return render(request,'account.html',{'user_profile':user_profile})
 
-
-
+@login_required(login_url='signin')
 def logout(request):
     auth.logout(request)
     return redirect('signin')

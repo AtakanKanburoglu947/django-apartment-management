@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Blog | Corlate</title>
+
+    <!-- core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+
+    {% include 'menu.html' %}
+    {% block content %}
+    <br>
+    <div class="container">
+        <div>
+          <h2>Profil</h2> <br>
+          <img src="{{user_profile.image.url}}" width="150px" height="150px" style="border-radius:50%" alt=""> <br> <br>
+          <p>Hesap ismi: {{user_profile.user}}</p>
+          <p>Ad: {{user_profile.user.first_name}}</p>
+          <p>Soyad: {{user_profile.user.last_name}}</p>
+          <p>E-mail adresi: {{user_profile.user.email}}</p>
+          <p>Telefon numarası: {{user_profile.phone}}</p>
+          <p>Adres: {{user_profile.address}}</p>
+        <a class="btn btn-primary" href="{% url 'logout' %}">Çıkış yap</a>
+        </div><!--/.row-->
+
+
+
+        </form>
+
+    </div>
+    </div>
+
+    {% endblock %}
+</body>
+<style>
+    p{
+    font-size: 16px; 
+    margin-top: 1rem;
+    font-weight: bold;
+    }
+</style>
