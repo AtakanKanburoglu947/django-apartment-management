@@ -3,10 +3,10 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
-from core.models import Profile,Content,Image,Comment,Message,Faq,Payment,Menu,Request
+from core.models import Profile,Content,Image,Comment,Message,Faq,Payment,Menu,Request,Setting
 from django.http import HttpResponse
 # Create your views here.
-
+setting = Setting.objects.all().first
 @login_required(login_url='signin')
 def index(request):
     return render(request,'index.html')
@@ -51,6 +51,9 @@ def payment(request):
 def blog(request):
     contents = Content.objects.all()
     return render(request,'blog.html',{'contents':contents})
+@login_required(login_url='signin')
+def about(request):
+    return render(request,'about-us.html')
 @login_required(login_url='signin')  
 def post(request,id):   
     content = Content.objects.get(id=id)
@@ -72,7 +75,7 @@ def upload(request):
         keywords = request.POST['keywords']
         new_image = Image.objects.create(image=image,title = title)
         new_image.save()
-        new_content = Content.objects.create(id=new_image.content_id,image=image,description=description,keywords=keywords)
+        new_content = Content.objects.create(id=new_image.content_id,image=image,description=description,keywords=keywords,title=title)
         new_content.save()
         return redirect('blog')
     contents = Content.objects.all()

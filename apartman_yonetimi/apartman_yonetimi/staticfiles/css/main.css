@@ -2333,7 +2333,6 @@ ul.sidebar-gallery {
 }
 
 .comment_section .media-body{
-  display:inherit;
 }
 
 #comments_title{
@@ -2361,14 +2360,7 @@ ul.sidebar-gallery {
 }
 
 .post_reply_comments:before {
-  border-color: transparent #F0F0F0 transparent transparent;
-  border-style: solid;
-  border-width: 15px;
-  content: " ";
-  height: 0;
-  left: 75px;
-  position: absolute;
-  top: 20px;
+  display: none;
 }
 
 .post_reply_comments h3, 
@@ -2400,15 +2392,7 @@ ul.sidebar-gallery {
 }
 
 .post_reply_comments a:before {
-  border-color: #c52d2f transparent transparent;
-  border-style: solid;
-  border-width: 16px;
-  bottom: -11px;
-  content: "";
-  height: 0;
-  left: -12px;
-  position: absolute;
-  z-index: 99999;
+  display: none;
 }
 
 .post_reply_comments h2 a{
@@ -2416,8 +2400,7 @@ ul.sidebar-gallery {
 }
 
 .message_heading {
-  margin-bottom: 50px;
-  margin-top: 60px;
+  display: none;
 }
 
 

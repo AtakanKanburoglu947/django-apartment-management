@@ -15,5 +15,6 @@ urlpatterns = [
     path('faq/',views.faq, name='faq'),
     path('request/',views.request,name='request'),
     path('logout/',views.logout,name='logout'),
-    path('account/',views.account,name='account')
+    path('account/',views.account,name='account'),
+    path('about/',views.about,name='about')
 ]

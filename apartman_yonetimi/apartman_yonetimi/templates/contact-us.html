@@ -37,8 +37,7 @@
         <div class="container">
             <div class="center">     
                 <br>   
-                <h2>Drop Your Message</h2>
-                <p class="lead">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h2>İletişim</h2>
             </div> 
             <div class="row contact-wrap"> 
                 <div class="status alert alert-success" style="display: none"></div>
@@ -46,30 +45,30 @@
                     {% csrf_token %}
                     <div class="col-sm-5 col-sm-offset-1">
                         <div class="mg-3">
-                            <label>Name *</label>
+                            <label>İsim*</label>
                             <input type="text" name="name" class="form-control" required="required">
                         </div>
                         <div class="mg-3">
-                            <label>Email *</label>
+                            <label>E-mail*</label>
                             <input type="email" name="email" class="form-control" required="required">
                         </div>
                         <div class="mg-3">
-                            <label>Phone</label>
+                            <label>Telefon*</label>
                             <input type="number" name="phone" class="form-control">
                         </div>
                           
                     </div>
                     <div class="col-sm-5">
                         <div class="mg-3">
-                            <label>Subject *</label>
+                            <label>Konu*</label>
                             <input type="text" name="subject" class="form-control" required="required">
                         </div>
                         <div class="mg-3">
-                            <label>Message *</label>
+                            <label>Mesaj*</label>
                             <textarea name="message" id="message" required="required" class="form-control" rows="8"></textarea>
                         </div>   <br>                    
                         <div class="form-group">
-                            <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Submit Message</button>
+                            <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Gönder</button>
                         </div>
                     </div>
                 </form> 
@@ -79,23 +78,8 @@
 
    
 
-    <footer id="footer" class="midnight-blue">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
-                </div>
-                <div class="col-sm-6">
-                    <ul class="pull-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Faq</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer><!--/#footer-->
+{% include 'footer.html' %}
+
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>

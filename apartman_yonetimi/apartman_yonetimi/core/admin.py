@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile,Content,Image,Faq,Comment,Menu,Message,Payment,Request
+from .models import Profile,Content,Image,Faq,Comment,Menu,Message,Payment,Request,Setting
 
 # Register your models here.
 admin.site.register(Profile)
@@ -11,3 +11,4 @@ admin.site.register(Menu)
 admin.site.register(Message)
 admin.site.register(Payment)
 admin.site.register(Request)
+admin.site.register(Setting)

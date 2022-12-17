@@ -98,3 +98,21 @@ class Request(models.Model):
     updated_at = models.DateTimeField(default=datetime.now)
     def __str__(self) -> str:
         return self.message
+class Setting(models.Model):
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4)
+    title = models.CharField(max_length=20)
+    keywords = models.CharField(max_length=100,null=True)
+    description = models.TextField(null=True)
+    company = models.CharField(max_length=20)
+    address = models.CharField(max_length=20)
+    phone = models.CharField(max_length=20)
+    fax = models.CharField(max_length=20)
+    email = models.CharField(max_length=20)
+    facebook = models.CharField(max_length=20)
+    instagram = models.CharField(max_length=20)
+    twitter = models.CharField(max_length=20)
+    aboutus = 'about-us'
+    contact = 'contact'
+    references = 'references'
+    status = models.BooleanField(default=True)
+

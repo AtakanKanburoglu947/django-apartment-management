@@ -38,8 +38,7 @@
 
     <section id="blog" class="container">
         <div class="center">
-            <h2>Blogs</h2>
-            <p class="lead">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+            <h2>Blog</h2>
             <a href="{% url 'upload' %}" style="font-size: large;" class="btn btn-primary " >Gönderi Oluştur</a>
         </div>
         <div class="blog">
@@ -52,9 +51,9 @@
                                 <a href="#"><img class="img-responsive img-blog" src="{{content.image.url}}" width="50%" height="200px" alt="" /></a>
                                 <h2><a href="/blogs/{{content.id}}">{{content.title}}</a></h2>
                                 <h3>{{content.description}}</h3>
-                                <h3>Keywords: {{content.keywords}} </h3>
-                                <h3>Date: {{content.created_at}}</h3>
-                                <a class="btn btn-primary readmore" href="/blogs/{{content.id}}">Read More <i class="fa fa-angle-right"></i></a>
+                                <h3>Anahtar Kelimeler: {{content.keywords}} </h3>
+                                <h3>Tarih: {{content.created_at}}</h3>
+                                <a class="btn btn-primary readmore" href="/blogs/{{content.id}}">Görüntüle <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>    
                     </div>
@@ -70,23 +69,8 @@
 
     
 
-    <footer id="footer" class="midnight-blue">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
-                </div>
-                <div class="col-sm-6">
-                    <ul class="pull-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Faq</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer><!--/#footer-->
+{% include 'footer.html' %}
+
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -96,4 +80,12 @@
     <script src="js/wow.min.js"></script>
 </body>
 </html>
+<style>
+    p{
+     white-space: nowrap;
+     max-lines: 50px;
+     overflow: hidden;
+     text-overflow: ellipsis;
+    }
+</style>
 {% endblock %}
