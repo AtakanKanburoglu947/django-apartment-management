@@ -11,7 +11,9 @@ setting = Setting.objects.all().first
 
 @login_required(login_url='signin')
 def index(request):
-    return render(request,'index.html',{'setting' :setting})
+    contents = Content.objects.order_by('-created_at')
+    first_content = Content.objects.latest('created_at')
+    return render(request,'index.html',{'setting' :setting, 'contents': contents,'first_content':first_content})
 
 def menu(request):
     return render(request,'menu.html',{'setting' :setting})
@@ -56,7 +58,7 @@ def payment(request):
     return render(request,'payment.html',{'setting' :setting})
 @login_required(login_url='signin')
 def blog(request):
-    contents = Content.objects.all()
+    contents = Content.objects.all().order_by('-created_at')
     return render(request,'blog.html',{'contents':contents,'setting' :setting})
 @login_required(login_url='signin')
 def about(request):
