@@ -77,25 +77,27 @@
                     {% csrf_token %}
                     <div class="mg-3">
                     <label>Kullanıcı Adı</label>
-                    <input type="text" name="username" placeholder="Username" class="form-control" required="required">
+                    <input type="text" name="username"  class="form-control" required="required">
                     </div>
-                    <br>
+                 
                     <div class="mg-3"> 
                         <label>E-posta</label>
-                        <input type="email" name="email" placeholder="Email" class="form-control"  required="required"></div>
-                        <br>
+                        <input type="email" name="email"  class="form-control"  required="required"></div>
+                    
                     <div class="mg-3"> 
                         <label>Şifre</label>
-                        <input type="password" placeholder="Password" name="password" class="form-control"  required="required">
-                        <br>
+                        <input type="password"  name="password" class="form-control"  required="required">
+                       
                     </div>
                     <div class="mg-3">
                         <label>Şifreyi Doğrula</label>
-                        <input type="password" placeholder="Confirm Password" name="password2" class="form-control"  required="required">
-<br>
+                        <input type="password"  name="password2" class="form-control"  required="required">
+
                     </div>
-             
+                    <div class="mg-3">
                     <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">Kayıt Ol</button>
+
+                    </div>
                     <div class="text-center mt-5 space-x-2">
                         <p class="text-base"> Hesabınız var mı? <a href="/signin"> Giriş Yapın </a></p>
                     </div>
@@ -110,6 +112,10 @@
 
 
 </body>
-
+<style>
+    .mg-3{
+        margin: 8px;
+    }
+</style>
 
 </html>

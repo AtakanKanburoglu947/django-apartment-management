@@ -13,19 +13,21 @@
 
     {% include 'menu.html' %}
     {% block content %}
-
-    <div class="container"> 
-        <div class="center"> <br>
+    <section>
+    <div class="container">
+        <div class="center">
             <h2>Galeri</h2>
             <div class="row">
-            {% for image in images %}
-            <a href="{{image.image.url}}" target="_blank">
-                <img src="{{image.image.url}}">
-            </a>
-            {% endfor %}
+                {% for image in images %}
+                <a href="{{image.image.url}}" target="_blank">
+                    <img src="{{image.image.url}}">
+                </a>
+                {% endfor %}
             </div>
-        </div> 
+        </div>
     </div>
+
+    </section>
 
 
     {% endblock %}

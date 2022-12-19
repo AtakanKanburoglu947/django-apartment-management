@@ -37,20 +37,19 @@
 <div class="container">
     <div class="center" style="height: 100%; display: flex; flex-direction: column; text-align: left; 
     justify-content: center; align-items: center; align-content: center; margin-top: 10%;">
-        <br>
-        <h2>Giriş Ekranı</h2> <br>
+        
+        <h2>Giriş Ekranı</h2> 
         <form action="" method="post" >
             {% csrf_token %}
-            <div class="mg-1">
+            <div class="mg-3">
                 <label>Kullanıcı Adı</label>
                 <input type="text" name="username" class="form-control" required="required" >
             </div> 
-            <br>
-            <div class="mg-1">
+          
+            <div class="mg-3">
                 <label>Şifre</label>
                 <input type="password" name="password" class="form-control" required="required">
-            </div> <br>
-            <br>
+            </div> 
             <div class="mg-3">
                 <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">Giriş Yap</button>
             </div>
@@ -68,7 +67,9 @@
 </div>
 
     <style>
-        
+        .mg-3{
+            margin: 8px;
+        }
     </style>
 
 
