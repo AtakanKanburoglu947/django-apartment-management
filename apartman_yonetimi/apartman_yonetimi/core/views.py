@@ -18,6 +18,9 @@ def index(request):
 def menu(request):
     return render(request,'menu.html',{'setting' :setting})
 
+def gallery(request):
+    images = Image.objects.all()
+    return render(request,'gallery.html',{'images':images,'setting':setting})
 
 @login_required(login_url='signin')
 def contact(request):

@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head><!--/head-->
+
+<body>
+
+    {% include 'menu.html' %}
+    {% block content %}
+
+    <div class="container"> 
+        <div class="center"> <br>
+            <h2>Galeri</h2>
+            <div class="row">
+            {% for image in images %}
+            <a href="{{image.image.url}}" target="_blank">
+                <img src="{{image.image.url}}">
+            </a>
+            {% endfor %}
+            </div>
+        </div> 
+    </div>
+
+
+    {% endblock %}
+    {% include 'footer.html' %}
+
+</body>
+<style>
+img{
+        margin: 8px;
+        width: 300px;
+        height: 300px;
+        border-radius: 50px;
+        border: solid 1px black;
+}
+</style>
