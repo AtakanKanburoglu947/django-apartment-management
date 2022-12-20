@@ -11,6 +11,7 @@ urlpatterns = [
     path('upload/',views.upload,name='upload'),
     path('blogs/<uuid:id>/',views.post,name='post'),
     path('blog/',views.blog,name='blog'),
+    path('contents/<uuid:id>',views.contents,name='contents'),
     path('payment/',views.payment, name='payment'),
     path('faq/',views.faq, name='faq'),
     path('request/',views.request,name='request'),

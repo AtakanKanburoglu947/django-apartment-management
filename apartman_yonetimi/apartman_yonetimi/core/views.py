@@ -8,15 +8,26 @@ from django.http import HttpResponse
 # Create your views here.
 
 setting = Setting.objects.all().first
+menus = Menu.objects.all()
 
 @login_required(login_url='signin')
 def index(request):
     contents = Content.objects.order_by('-created_at')
     first_content = Content.objects.latest('created_at')
-    return render(request,'index.html',{'setting' :setting, 'contents': contents,'first_content':first_content})
+    return render(request,'index.html',{'setting' :setting, 'contents': contents,'first_content':first_content,'menus':menus})
 
+@login_required(login_url='signin')
 def menu(request):
-    return render(request,'menu.html',{'setting' :setting})
+    return render(request,'menu.html',{'setting' :setting,'menus':menus})
+
+@login_required(login_url='signin')
+
+def contents(request,id):
+    contents = Content.objects.filter(menu_id=id)
+    menu_title = Menu.objects.get(id=id).title
+    return render(request,'contents.html',{'contents':contents,'menu_title':menu_title})
+
+@login_required(login_url='signin')
 
 def gallery(request):
     images = Image.objects.all()
@@ -86,9 +97,17 @@ def upload(request):
         description = request.POST['description']
         title = request.POST['title']
         keywords = request.POST['keywords']
+        type = request.POST['type']
         new_image = Image.objects.create(image=image,title = title)
+        menu_id = Menu.objects.get(title=type)
         new_image.save()
-        new_content = Content.objects.create(id=new_image.content_id,image=image,description=description,keywords=keywords,title=title)
+        new_content = Content.objects.create(id=new_image.content_id,
+        image=image,description=description,
+        keywords=keywords,
+        title=title,
+        type = type,
+        menu_id = menu_id.id
+        )
         new_content.save()
         return redirect('blog')
     contents = Content.objects.all()

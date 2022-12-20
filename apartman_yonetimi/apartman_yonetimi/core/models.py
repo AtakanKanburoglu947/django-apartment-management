@@ -17,7 +17,7 @@ class Content(models.Model):
     keywords = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='content_images',default='content_images/blog_image.png')
-    menu_id = models.IntegerField(blank=True,null=True)
+    menu_id = models.UUIDField(null=True)
     detail = models.CharField(max_length=100)
     type = models.CharField(max_length=10)
     created_at = models.DateTimeField(default=datetime.now)
@@ -78,7 +78,7 @@ class Message(models.Model):
 class Menu(models.Model):
     id = models.UUIDField(primary_key=True,default=uuid.uuid4)
     parent_id = models.UUIDField(default=uuid.uuid4)
-    title = "Title"
+    title = models.CharField(blank=True,max_length=20)
     keywords = models.CharField(max_length=100,null=True)
     description = models.TextField(null=True)
     image = models.ImageField(upload_to='content_images',blank=True)

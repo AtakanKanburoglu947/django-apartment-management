@@ -69,7 +69,9 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sayfalar <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'blog' %}">Blog</a></li>
-
+                                {% for menu in menus %}
+                                <li><a href="{% url 'contents' menu.id %}">{{menu.title}}</a></li>
+                                {% endfor %}
                             </ul>
                         </li>
                         <li><a href="{% url 'gallery' %}">Galeri</a></li>

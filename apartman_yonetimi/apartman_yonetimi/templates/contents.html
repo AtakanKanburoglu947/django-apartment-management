@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head><!--/head-->
+
+<body>
+
+    {% include 'menu.html' %}
+    {% block content %}
+
+    <section id="blog" class="container">
+        <div class="center">
+            <h2>{{menu_title}}</h2>
+        </div>
+        <div class="blog">
+            <div class="row">
+                {% for content in contents %}
+                <div class="col-md-8">
+                    <div class="blog-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-10 blog-content">
+                                <a href="#"><img class="img-responsive img-blog" src="{{content.image.url}}" width="50%"
+                                        height="200px" alt="" /></a>
+                                <h2><a href="/blogs/{{content.id}}">{{content.title}}</a></h2>
+                                <h3>{{content.description}}</h3>
+                                <h3>Anahtar Kelimeler: {{content.keywords}} </h3>
+                                <h3>Tarih: {{content.created_at}}</h3>
+                                <a class="btn btn-primary readmore" href="/blogs/{{content.id}}">Görüntüle <i
+                                        class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+
+
+    </section><!--/#blog-->
+    {% endblock %}
+    {% include 'footer.html' %}
