@@ -36,35 +36,35 @@
    
     <br>
     <div class="container">
-        <div class="center" style="height: 100%; display: flex; flex-direction: column; text-align: left; 
-    justify-content: center; align-items: center; align-content: center; margin-top: 10%" >
+        <div class="center" style="height: 100%; display: flex; flex-direction: column;  text-align: left;
+            justify-content: center; align-items: center; align-content: center;">
             <h2>Ayarlar</h2>
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mg-3" style="text-align: left;">
-                    <label >Image</label>
+                    <label >Resim</label>
                     <input type="file" name="image" class="form-control">
                 </div>
-                <br>
                 <div class="mg-3" style="text-align: left;">
-                    <label>Phone</label>
+                    <label>Telefon</label>
                     <input type="text" name="phone" class="form-control" required="required"> </input>
-                </div> <br>
+                </div> 
                 <div class="mg-3" style="text-align: left;">
-                    <label>Address</label>
+                    <label>Adres</label>
                     <input type="text" name="address" class="form-control" required="required"> </input>
-                </div> <br>
+                </div> 
                 <div class="mg-3">
                     <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">Kaydet</button>
                 </div>
             </form>
         </div><!--/.row-->
-
-
-
         </form>
 
     </div>
 </div>
-
+<style>
+    .mg-3{
+        margin: 8px;
+    }
+</style>
 </body>

@@ -122,13 +122,14 @@ def signin(request):
             return redirect('/')
         else:
             messages.info(request,'Hesap bulunamadı ')
+            return redirect('signin')
     else:
         return render(request,'signin.html')
 @login_required(login_url='signin')
 def settings(request):
     user_profile = Profile.objects.get(user= request.user)
     if request.method == 'POST':
-        if request.FILES.get('image') == None:
+        if request.FILES.get('image'):
             image = user_profile.image
             phone = request.POST['phone']
             address = request.POST['address']
@@ -136,7 +137,7 @@ def settings(request):
             user_profile.phone = phone
             user_profile.address = address
             user_profile.save()
-        if request.FILES.get('image') != None:
+        else:
             image = request.FILES.get('image')
             phone = request.POST['phone']
             address = request.POST['address']
