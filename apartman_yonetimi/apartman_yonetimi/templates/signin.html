@@ -56,6 +56,11 @@
             <div class="text-center mt-5 space-x-2">
                 <p class="text-base"> Hesabınız yok mu? <a href="/signup"> Hesap oluşturun </a></p>
             </div>
+            <div>
+                {% for message in messages %}
+                <h5>{{message}}</h5>
+                {% endfor %}
+            </div>
         </form>
     </div><!--/.row-->
 

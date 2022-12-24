@@ -14,52 +14,58 @@
 		{% block content %}
     <section id="about-us">
         <div class="container">
-			<div class="center wow fadeInDown">
-				<h2>SSS</h2>
-				<div id="faq" role="tablist" aria-multiselectable="false">
-					{% for faq in faqs %}
-					
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="{{faq.id}}]">
-							<h5 class="panel-title">
-								<a data-toggle="collapse" data-parent="#faq" href="#{{faq.id}}" aria-expanded="false"
-									aria-controls="{{faq.question}}">
-									{{faq.question}}
-								</a>
-							</h5>
-						</div>
-						<div id="{{faq.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{faq.question}}">
-							<div class="panel-body">
-								{{faq.answer}}
-							</div>
-						</div>
-					</div>				
-				</div>
-				{% endfor %}
+			{% for faq in faqs %}
+			<button class="accordion">{{faq.question}}</button>
+			<div class="panel">
+				<p>{{faq.answer}}</p>
 			</div>
-			
-			
-			
-
-	
-	
-					
-			
-    </section><!--/about-us-->
-	
-    
-{% include 'footer.html' %}
-
-
-    <script src="js/jquery.js"></script>
-    <script type="text/javascript">
-        $('.carousel').carousel()
-    </script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/jquery.isotope.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/wow.min.js"></script>
+			{% endfor %}
+			</div>			
+    </section>
 </body>
 </html>
 {% endblock %}
+{% include 'footer.html' %}
+
+<style>
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  font-size: large;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+
+}
+
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.panel {
+  font-size: large;
+  padding: 16px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+}
+</style>
+<script>
+	var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+			acc[i].addEventListener("click", function () {
+				this.classList.toggle("active");
+				var panel = this.nextElementSibling;
+				if (panel.style.display === "block") {
+					panel.style.display = "none";
+				} else {
+					panel.style.display = "block";
+				}
+			});
+		}
+</script>

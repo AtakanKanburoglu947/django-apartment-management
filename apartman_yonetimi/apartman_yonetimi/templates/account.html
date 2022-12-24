@@ -18,7 +18,9 @@
     <div class="container">
       <div>
         <h2>Profil</h2>
+        {% if user_profile.image %}
         <img src="{{user_profile.image.url}}" width="150px" height="150px" style="border-radius:50%" alt=""> <br> <br>
+        {% endif %}
         <p>Hesap ismi: {{user_profile.user}}</p>
         <p>Ad: {{user_profile.user.first_name}}</p>
         <p>Soyad: {{user_profile.user.last_name}}</p>

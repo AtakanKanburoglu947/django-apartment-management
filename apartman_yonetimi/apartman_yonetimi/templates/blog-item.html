@@ -16,7 +16,9 @@
     <section id="blog" class="container">
         <div class="center">
             <h2 class="lead">{{content.title}}</h2>
+            {% if content.image_url %} 
             <img src="{{content.image.url}}" alt="" width="500" height="500"> 
+            {% endif %}
             <p class="lead">{{content.description}}</p>
         </div>
 
